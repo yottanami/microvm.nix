@@ -151,7 +151,11 @@ in
         When "deflating" or decreasing the balloon the host can give the memory
         back to the VM.
 
-        virtio-mem is recommended over ballooning if supported by the hypervisor.
+        virtio-mem is the better mechanism for hot-plugging memory where the
+        hypervisor supports it, but ballooning is not merely a fallback: it
+        also implements free-page-reporting independent of any inflate/deflate
+        cycle, and it provides the communication channel that virtio-mem
+        itself relies on to free pages back to the host.
       '';
       default = false;
       type = types.bool;
